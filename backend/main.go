@@ -1,4 +1,4 @@
-package backend
+package main
 
 import (
 	"github.com/gin-contrib/cors"
@@ -9,35 +9,21 @@ import (
 	"github.com/mymikasa/mbook/backend/internal/repository/dao"
 	"github.com/mymikasa/mbook/backend/internal/service"
 	"github.com/mymikasa/mbook/backend/internal/web"
+	"github.com/mymikasa/mbook/backend/internal/web/middleware"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
-	"net/http"
 	"strings"
 	"time"
 )
 
 func main() {
-	//db := initDB()
-	//server := initWebServer()
-
-	//u := initUser(db)
-	//u.RegisterRoutes(server)
-
-	server := gin.Default()
-	server.GET("/hello", func(ctx *gin.Context) {
-		ctx.String(http.StatusOK, "你好，你来了")
-	})
-
-	server.Run(":8080")
-}
-
-type UserRepository struct {
-	dao *dao.UserDAO
-}
-
-func NewUserRepository(dao *dao.UserDAO) *UserRepository {
-	return &UserRepository{
-		dao: dao,
+	db := initDB()
+	server := initWebServer()
+	u := initUser(db)
+	u.RegisterRoutes(server)
+	err := server.Run(":8080")
+	if err != nil {
+		return
 	}
 }
 
@@ -52,10 +38,10 @@ func initWebServer() *gin.Engine {
 		println("这是第二个 middleware")
 	})
 
-	redisClient := redis.NewClient(&redis.Options{
-		Addr: "localhost:6379",
-	})
-	server.Use(ratelimit.NewBuilder(redisClient, time.Second, 100).Build())
+	//redisClient := redis.NewClient(&redis.Options{
+	//	Addr: "localhost:6379",
+	//})
+	//server.Use(ratelimit.NewBuilder(redisClient, time.Second, 100).Build())
 
 	server.Use(cors.New(cors.Config{
 		//AllowOrigins: []string{"*"},
@@ -95,7 +81,7 @@ func initWebServer() *gin.Engine {
 	//server.Use(middleware.NewLoginMiddlewareBuilder().
 	//	IgnorePaths("/users/signup").
 	//	IgnorePaths("/users/login").Build())
-	server.Use(middleware.NewLoginJWTMiddlewareBuilder().
+	server.Use(middleware.NewLoginMiddlewareBuilder().
 		IgnorePaths("/users/signup").
 		IgnorePaths("/users/login").Build())
 
@@ -118,7 +104,7 @@ func initUser(db *gorm.DB) *web.UserHandler {
 }
 
 func initDB() *gorm.DB {
-	db, err := gorm.Open(mysql.Open("root:root@tcp(localhost:13316)/webook"))
+	db, err := gorm.Open(mysql.Open("root:root@tcp(localhost:3306)/webook"))
 	if err != nil {
 		// 我只会在初始化过程中 panic
 		// panic 相当于整个 goroutine 结束

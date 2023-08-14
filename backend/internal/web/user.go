@@ -2,6 +2,7 @@ package web
 
 import (
 	regexp "github.com/dlclark/regexp2"
+	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
 	"github.com/mymikasa/mbook/backend/internal/domain"
 	"github.com/mymikasa/mbook/backend/internal/service"
@@ -12,24 +13,28 @@ type UserHandler struct {
 	svc         *service.UserService
 	emailExp    *regexp.Regexp
 	passwordExp *regexp.Regexp
+	birthdayExp *regexp.Regexp
 }
 
 func NewUserHandler(svc *service.UserService) *UserHandler {
 	const (
 		emailRegexPattern    = "^\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$"
 		passwordRegexPattern = `^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$`
+		birthdayRegexPattern = `^\d{4}-\d{1,2}-\d{1,2}$`
 	)
 	emailExp := regexp.MustCompile(emailRegexPattern, regexp.None)
 	passwordExp := regexp.MustCompile(passwordRegexPattern, regexp.None)
+	birthdayExp := regexp.MustCompile(birthdayRegexPattern, regexp.None)
 	return &UserHandler{
 		svc:         svc,
 		emailExp:    emailExp,
 		passwordExp: passwordExp,
+		birthdayExp: birthdayExp,
 	}
 }
 
 func (u *UserHandler) RegisterRoutesV1(ug *gin.RouterGroup) {
-	ug.GET("/profile", u.Pofile)
+	ug.GET("/profile", u.Profile)
 	ug.POST("/signup", u.SignUp)
 	ug.POST("/login", u.Login)
 	ug.POST("/edit", u.Edit)
@@ -37,9 +42,9 @@ func (u *UserHandler) RegisterRoutesV1(ug *gin.RouterGroup) {
 
 func (u *UserHandler) RegisterRoutes(server *gin.Engine) {
 	ug := server.Group("/users")
-	ug.GET("/profile", u.ProfileJWT)
+	ug.GET("/profile", u.Profile)
 	ug.POST("/signup", u.SignUp)
-	ug.POST("login", u.LoginJWT)
+	ug.POST("login", u.Login)
 	ug.POST("/edit", u.Edit)
 }
 
@@ -146,37 +151,45 @@ func (u *UserHandler) Logout(ctx *gin.Context) {
 }
 
 func (u *UserHandler) Edit(ctx *gin.Context) {
+	type EditReq struct {
+		Email    string `json:"email"`
+		NickName string `json:"nickName"`
+		Birthday string `json:"birthday"`
+		Bio      string `json:"bio"`
+	}
 
-}
+	var req EditReq
 
-func (u *UserHandler) ProfileJWT(ctx *gin.Context) {
-	c, _ := ctx.Get("claims")
-	// 你可以断定，必然有 claims
-	//if !ok {
-	//	// 你可以考虑监控住这里
-	//	ctx.String(http.StatusOK, "系统错误")
-	//	return
-	//}
-	// ok 代表是不是 *UserClaims
-	claims, ok := c.(*UserClaims)
-	if !ok {
-		// 你可以考虑监控住这里
+	if err := ctx.Bind(&req); err != nil {
+		ctx.JSON(http.StatusBadRequest, "Invalid Request")
+		return
+	}
+
+	// 判断邮箱格式
+	ok, err := u.emailExp.MatchString(req.Email)
+	if err != nil {
 		ctx.String(http.StatusOK, "系统错误")
 		return
 	}
-	println(claims.Uid)
-	ctx.String(http.StatusOK, "你的 profile")
-	// 这边就是你补充 profile 的其它代码
+	if !ok {
+		ctx.String(http.StatusOK, "你的邮箱格式不对")
+		return
+	}
+	//
+	ok, err = u.birthdayExp.MatchString(req.Birthday)
+	if err != nil {
+		ctx.String(http.StatusOK, "系统错误")
+		return
+	}
+	if !ok {
+		ctx.String(http.StatusOK, "出生日期不对")
+		return
+	}
+
+	// 判断当前用户是否是
+
 }
 
 func (u *UserHandler) Profile(ctx *gin.Context) {
 	ctx.String(http.StatusOK, "这是你的 Profile")
-}
-
-type UserClaims struct {
-	jwt.RegisteredClaims
-	// 声明你自己的要放进去 token 里面的数据
-	Uid int64
-	// 自己随便加
-	UserAgent string
 }
