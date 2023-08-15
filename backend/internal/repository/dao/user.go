@@ -36,6 +36,11 @@ func (dao *UserDAO) FindByEmail(ctx context.Context, email string) (User, error)
 	return u, err
 }
 
+func (dao *UserDAO) Update(ctx context.Context, user User) error {
+
+	return dao.db.WithContext(ctx).Update()
+}
+
 // User 直接对应数据库表结构
 // entity， model， PO(persistent object)
 type User struct {
@@ -45,6 +50,8 @@ type User struct {
 	Password string
 
 	// 往这面加
+	BirthDay string
+	NickName string
 
 	// 创建时间，毫秒数
 	Ctime int64

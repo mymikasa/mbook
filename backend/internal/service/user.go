@@ -11,6 +11,8 @@ import (
 var ErrUserDuplicateEmail = repository.ErrUserDuplicateEmail
 var ErrInvalidUserOrPassword = errors.New("账号/邮箱或密码不对")
 
+//var ErrEmailAlreadyExisted = errors.New("邮箱已存在")
+
 type UserService struct {
 	repo *repository.UserRepository
 }
@@ -44,4 +46,19 @@ func (svc *UserService) SignUp(ctx context.Context, u domain.User) error {
 	}
 	u.Password = string(hash)
 	return svc.repo.Create(ctx, u)
+}
+
+func (svc *UserService) Edit(ctx context.Context, u domain.User) error {
+
+	user, err := svc.repo.FindByEmail(ctx, u.Email)
+
+	if !errors.Is(err, repository.ErrUserNotFound) {
+		return ErrUserDuplicateEmail
+	}
+
+	user.Birthday = u.Birthday
+	user.NickName = u.NickName
+
+	// 更新
+	return svc.repo.Update(ctx, u)
 }

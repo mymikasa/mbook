@@ -155,7 +155,7 @@ func (u *UserHandler) Edit(ctx *gin.Context) {
 		Email    string `json:"email"`
 		NickName string `json:"nickName"`
 		Birthday string `json:"birthday"`
-		Bio      string `json:"bio"`
+		//Bio      string `json:"bio"`
 	}
 
 	var req EditReq
@@ -182,11 +182,16 @@ func (u *UserHandler) Edit(ctx *gin.Context) {
 		return
 	}
 	if !ok {
-		ctx.String(http.StatusOK, "出生日期不对")
+		ctx.String(http.StatusOK, "出生日期格式不对")
 		return
 	}
 
-	// 判断当前用户是否是
+	// 判断当前邮箱是否已存在
+	u.svc.Edit(ctx, domain.User{
+		Email:    req.Email,
+		NickName: req.NickName,
+		Birthday: req.Birthday,
+	})
 
 }
 
