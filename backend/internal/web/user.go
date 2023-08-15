@@ -33,18 +33,11 @@ func NewUserHandler(svc *service.UserService) *UserHandler {
 	}
 }
 
-func (u *UserHandler) RegisterRoutesV1(ug *gin.RouterGroup) {
-	ug.GET("/profile", u.Profile)
-	ug.POST("/signup", u.SignUp)
-	ug.POST("/login", u.Login)
-	ug.POST("/edit", u.Edit)
-}
-
 func (u *UserHandler) RegisterRoutes(server *gin.Engine) {
 	ug := server.Group("/users")
 	ug.GET("/profile", u.Profile)
 	ug.POST("/signup", u.SignUp)
-	ug.POST("login", u.Login)
+	ug.POST("/login", u.Login)
 	ug.POST("/edit", u.Edit)
 }
 
@@ -153,7 +146,7 @@ func (u *UserHandler) Logout(ctx *gin.Context) {
 func (u *UserHandler) Edit(ctx *gin.Context) {
 	type EditReq struct {
 		Email    string `json:"email"`
-		NickName string `json:"nickName"`
+		NickName string `json:"nickname"`
 		Birthday string `json:"birthday"`
 		//Bio      string `json:"bio"`
 	}
@@ -165,18 +158,8 @@ func (u *UserHandler) Edit(ctx *gin.Context) {
 		return
 	}
 
-	// 判断邮箱格式
-	ok, err := u.emailExp.MatchString(req.Email)
-	if err != nil {
-		ctx.String(http.StatusOK, "系统错误")
-		return
-	}
-	if !ok {
-		ctx.String(http.StatusOK, "你的邮箱格式不对")
-		return
-	}
 	//
-	ok, err = u.birthdayExp.MatchString(req.Birthday)
+	ok, err := u.birthdayExp.MatchString(req.Birthday)
 	if err != nil {
 		ctx.String(http.StatusOK, "系统错误")
 		return
@@ -186,15 +169,29 @@ func (u *UserHandler) Edit(ctx *gin.Context) {
 		return
 	}
 
-	// 判断当前邮箱是否已存在
-	u.svc.Edit(ctx, domain.User{
+	if err := u.svc.Edit(ctx, domain.User{
 		Email:    req.Email,
 		NickName: req.NickName,
 		Birthday: req.Birthday,
-	})
+	}); err != nil {
+		ctx.JSON(http.StatusBadRequest, "请求失败")
+		return
+	}
 
+	ctx.JSON(http.StatusOK, "请求成功")
+	return
 }
 
 func (u *UserHandler) Profile(ctx *gin.Context) {
-	ctx.String(http.StatusOK, "这是你的 Profile")
+	email := ctx.Query("email")
+
+	user, err := u.svc.Profile(ctx, email)
+	if err != nil {
+		ctx.JSON(http.StatusBadRequest, "未知错误")
+		return
+	}
+	ctx.JSON(http.StatusOK, gin.H{
+		"nickname": user.NickName,
+		"birthday": user.Birthday,
+	})
 }

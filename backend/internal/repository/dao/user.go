@@ -37,8 +37,7 @@ func (dao *UserDAO) FindByEmail(ctx context.Context, email string) (User, error)
 }
 
 func (dao *UserDAO) Update(ctx context.Context, user User) error {
-
-	return dao.db.WithContext(ctx).Update()
+	return dao.db.WithContext(ctx).Model(&user).Where("id =? ", user.Id).Updates(user).Error
 }
 
 // User 直接对应数据库表结构
@@ -50,7 +49,7 @@ type User struct {
 	Password string
 
 	// 往这面加
-	BirthDay string
+	Birthday string
 	NickName string
 
 	// 创建时间，毫秒数
