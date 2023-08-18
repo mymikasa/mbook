@@ -82,6 +82,7 @@ func initWebServer() *gin.Engine {
 	//	IgnorePaths("/users/signup").
 	//	IgnorePaths("/users/login").Build())
 	server.Use(middleware.NewLoginMiddlewareBuilder().
+		IgnorePaths("/users/profile").
 		IgnorePaths("/users/signup").
 		IgnorePaths("/users/login").Build())
 

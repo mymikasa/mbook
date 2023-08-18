@@ -46,12 +46,18 @@ func (r *UserRepository) FindByEmail(ctx context.Context, email string) (domain.
 		Id:       u.Id,
 		Email:    u.Email,
 		Password: u.Password,
+		Birthday: u.Birthday,
+		NickName: u.NickName,
 	}, nil
 
 }
 
 func (r *UserRepository) Update(ctx context.Context, u domain.User) error {
 	return r.dao.Update(ctx, dao.User{
-		Email: u.Email,
+		Id:       u.Id,
+		Email:    u.Email,
+		NickName: u.NickName,
+		Birthday: u.Birthday,
+		Password: u.Password,
 	})
 }

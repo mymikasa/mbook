@@ -52,13 +52,23 @@ func (svc *UserService) Edit(ctx context.Context, u domain.User) error {
 
 	user, err := svc.repo.FindByEmail(ctx, u.Email)
 
-	if !errors.Is(err, repository.ErrUserNotFound) {
-		return ErrUserDuplicateEmail
+	if errors.Is(err, repository.ErrUserNotFound) {
+		return err
 	}
 
 	user.Birthday = u.Birthday
 	user.NickName = u.NickName
 
 	// 更新
-	return svc.repo.Update(ctx, u)
+	return svc.repo.Update(ctx, user)
+}
+
+func (svc *UserService) Profile(ctx context.Context, email string) (domain.User, error) {
+	user, err := svc.repo.FindByEmail(ctx, email)
+
+	if errors.Is(err, repository.ErrUserNotFound) {
+		return domain.User{}, err
+	}
+
+	return user, nil
 }
