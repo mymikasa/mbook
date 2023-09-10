@@ -232,7 +232,7 @@ func (u *UserHandler) Edit(ctx *gin.Context) {
 }
 
 func (u *UserHandler) Profile(ctx *gin.Context) {
-	email := ctx.Query("email")
+	//email := ctx.Query("email")
 
 	c, _ := ctx.Get("claims")
 
@@ -243,8 +243,8 @@ func (u *UserHandler) Profile(ctx *gin.Context) {
 		return
 	}
 
-	println(claims.Uid)
-	user, err := u.svc.Profile(ctx, email)
+	//println(claims.Uid)
+	user, err := u.svc.Profile(ctx, claims.Uid)
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, "未知错误")
 		return

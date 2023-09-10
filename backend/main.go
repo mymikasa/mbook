@@ -3,13 +3,15 @@ package main
 import (
 	"github.com/gin-contrib/cors"
 	"github.com/gin-contrib/sessions"
-	"github.com/gin-contrib/sessions/redis"
+	"github.com/gin-contrib/sessions/memstore"
 	"github.com/gin-gonic/gin"
+	"github.com/mymikasa/mbook/backend/internal/pkg/ginx/middlewares/ratelimit"
 	"github.com/mymikasa/mbook/backend/internal/repository"
 	"github.com/mymikasa/mbook/backend/internal/repository/dao"
 	"github.com/mymikasa/mbook/backend/internal/service"
 	"github.com/mymikasa/mbook/backend/internal/web"
 	"github.com/mymikasa/mbook/backend/internal/web/middleware"
+	"github.com/redis/go-redis/v9"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"strings"
@@ -33,10 +35,12 @@ func main() {
 func initWebServer() *gin.Engine {
 	server := gin.Default()
 
-	//redisClient := redis.NewClient(&redis.Options{
-	//	Addr: config.Config.Redis.Addr,
-	//})
-	//server.Use(ratelimit.NewBuilder(redisClient, time.Second, 100).Build())
+	redisClient := redis.NewClient(&redis.Options{
+		Addr: "localhost:6379",
+	})
+
+	// 限流
+	server.Use(ratelimit.NewBuilder(redisClient, time.Second, 100).Build())
 
 	server.Use(cors.New(cors.Config{
 		//AllowOrigins: []string{"*"},
@@ -59,15 +63,15 @@ func initWebServer() *gin.Engine {
 	// 步骤1
 	//store := cookie.NewStore([]byte("secret"))
 
-	//store := memstore.NewStore([]byte("95osj3fUD7fo0mlYdDbncXz4VD2igvf0"),
-	//	[]byte("0Pf2r0wZBpXVXlQNdpwCXN4ncnlnZSc3"))
-	store, err := redis.NewStore(16,
-		"tcp", "localhost:6379", "",
-		[]byte("95osj3fUD7fo0mlYdDbncXz4VD2igvf0"), []byte("0Pf2r0wZBpXVXlQNdpwCXN4ncnlnZSc3"))
-
-	if err != nil {
-		panic(err)
-	}
+	store := memstore.NewStore([]byte("95osj3fUD7fo0mlYdDbncXz4VD2igvf0"),
+		[]byte("0Pf2r0wZBpXVXlQNdpwCXN4ncnlnZSc3"))
+	//store, err := redis.NewStore(16,
+	//	"tcp", "localhost:6379", "",
+	//	[]byte("95osj3fUD7fo0mlYdDbncXz4VD2igvf0"), []byte("0Pf2r0wZBpXVXlQNdpwCXN4ncnlnZSc3"))
+	//
+	//if err != nil {
+	//	panic(err)
+	//}
 
 	//myStore := &sqlx_store.Store{}
 

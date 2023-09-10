@@ -55,7 +55,7 @@ func (l *LoginJWTMiddlewareBuilder) Build() gin.HandlerFunc {
 		})
 		if err != nil {
 			// 没登录
-			ctx.AbortWithStatus(http.StatusUnauthorized)
+			ctx.AbortWithStatus(http.StatusForbidden)
 			return
 		}
 		//claims.ExpiresAt.Time.Before(time.Now()) {

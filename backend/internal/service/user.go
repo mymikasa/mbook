@@ -63,8 +63,8 @@ func (svc *UserService) Edit(ctx context.Context, u domain.User) error {
 	return svc.repo.Update(ctx, user)
 }
 
-func (svc *UserService) Profile(ctx context.Context, email string) (domain.User, error) {
-	user, err := svc.repo.FindByEmail(ctx, email)
+func (svc *UserService) Profile(ctx context.Context, uid int64) (domain.User, error) {
+	user, err := svc.repo.FindById(ctx, uid)
 
 	if errors.Is(err, repository.ErrUserNotFound) {
 		return domain.User{}, err

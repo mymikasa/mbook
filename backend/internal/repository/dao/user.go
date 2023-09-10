@@ -40,6 +40,13 @@ func (dao *UserDAO) Update(ctx context.Context, user User) error {
 	return dao.db.WithContext(ctx).Model(&user).Where("id =? ", user.Id).Updates(user).Error
 }
 
+func (dao *UserDAO) FindById(ctx context.Context, id int64) (User, error) {
+	var u User
+
+	err := dao.db.WithContext(ctx).Where("id = ?", id).First(&u).Error
+	return u, err
+}
+
 // User 直接对应数据库表结构
 // entity， model， PO(persistent object)
 type User struct {
