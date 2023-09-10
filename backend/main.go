@@ -3,7 +3,7 @@ package main
 import (
 	"github.com/gin-contrib/cors"
 	"github.com/gin-contrib/sessions"
-	"github.com/gin-contrib/sessions/memstore"
+	"github.com/gin-contrib/sessions/redis"
 	"github.com/gin-gonic/gin"
 	"github.com/mymikasa/mbook/backend/internal/repository"
 	"github.com/mymikasa/mbook/backend/internal/repository/dao"
@@ -19,27 +19,22 @@ import (
 func main() {
 	db := initDB()
 	server := initWebServer()
+
 	u := initUser(db)
 	u.RegisterRoutes(server)
-	err := server.Run(":8080")
-	if err != nil {
-		return
-	}
+
+	//server.GET("/hello", func(ctx *gin.Context) {
+	//	ctx.String(http.StatusOK, "你好，你来了")
+	//})
+
+	server.Run(":8080")
 }
 
 func initWebServer() *gin.Engine {
 	server := gin.Default()
 
-	server.Use(func(ctx *gin.Context) {
-		println("这是第一个 middleware")
-	})
-
-	server.Use(func(ctx *gin.Context) {
-		println("这是第二个 middleware")
-	})
-
 	//redisClient := redis.NewClient(&redis.Options{
-	//	Addr: "localhost:6379",
+	//	Addr: config.Config.Redis.Addr,
 	//})
 	//server.Use(ratelimit.NewBuilder(redisClient, time.Second, 100).Build())
 
@@ -64,15 +59,15 @@ func initWebServer() *gin.Engine {
 	// 步骤1
 	//store := cookie.NewStore([]byte("secret"))
 
-	store := memstore.NewStore([]byte("95osj3fUD7fo0mlYdDbncXz4VD2igvf0"),
-		[]byte("0Pf2r0wZBpXVXlQNdpwCXN4ncnlnZSc3"))
-	//store, err := redis.NewStore(16,
-	//	"tcp", "localhost:6379", "",
-	//	[]byte("95osj3fUD7fo0mlYdDbncXz4VD2igvf0"), []byte("0Pf2r0wZBpXVXlQNdpwCXN4ncnlnZSc3"))
-	//
-	//if err != nil {
-	//	panic(err)
-	//}
+	//store := memstore.NewStore([]byte("95osj3fUD7fo0mlYdDbncXz4VD2igvf0"),
+	//	[]byte("0Pf2r0wZBpXVXlQNdpwCXN4ncnlnZSc3"))
+	store, err := redis.NewStore(16,
+		"tcp", "localhost:6379", "",
+		[]byte("95osj3fUD7fo0mlYdDbncXz4VD2igvf0"), []byte("0Pf2r0wZBpXVXlQNdpwCXN4ncnlnZSc3"))
+
+	if err != nil {
+		panic(err)
+	}
 
 	//myStore := &sqlx_store.Store{}
 
@@ -81,8 +76,7 @@ func initWebServer() *gin.Engine {
 	//server.Use(middleware.NewLoginMiddlewareBuilder().
 	//	IgnorePaths("/users/signup").
 	//	IgnorePaths("/users/login").Build())
-	server.Use(middleware.NewLoginMiddlewareBuilder().
-		IgnorePaths("/users/profile").
+	server.Use(middleware.NewLoginJWTMiddlewareBuilder().
 		IgnorePaths("/users/signup").
 		IgnorePaths("/users/login").Build())
 

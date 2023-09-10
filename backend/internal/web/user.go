@@ -1,12 +1,16 @@
 package web
 
 import (
+	"errors"
+	"fmt"
 	regexp "github.com/dlclark/regexp2"
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
+	jwt "github.com/golang-jwt/jwt/v5"
 	"github.com/mymikasa/mbook/backend/internal/domain"
 	"github.com/mymikasa/mbook/backend/internal/service"
 	"net/http"
+	"time"
 )
 
 type UserHandler struct {
@@ -37,7 +41,7 @@ func (u *UserHandler) RegisterRoutes(server *gin.Engine) {
 	ug := server.Group("/users")
 	ug.GET("/profile", u.Profile)
 	ug.POST("/signup", u.SignUp)
-	ug.POST("/login", u.Login)
+	ug.POST("/login", u.LoginJWT)
 	ug.POST("/edit", u.Edit)
 }
 
@@ -106,8 +110,9 @@ func (u *UserHandler) Login(ctx *gin.Context) {
 	if err := ctx.Bind(&req); err != nil {
 		return
 	}
+
 	user, err := u.svc.Login(ctx, req.Email, req.Password)
-	if err == service.ErrInvalidUserOrPassword {
+	if errors.Is(err, service.ErrInvalidUserOrPassword) {
 		ctx.String(http.StatusOK, "用户名或密码不对")
 		return
 	}
@@ -120,12 +125,56 @@ func (u *UserHandler) Login(ctx *gin.Context) {
 
 	sess.Set("userId", user.Id)
 	sess.Options(sessions.Options{
-		Secure:   true,
-		HttpOnly: true,
+		//Secure:   true,
+		//HttpOnly: true,
 		// 一分钟过期
-		MaxAge: 60,
+		MaxAge: 600,
 	})
 	sess.Save()
+	ctx.String(http.StatusOK, "登录成功")
+	return
+}
+
+func (u *UserHandler) LoginJWT(ctx *gin.Context) {
+	type LoginReq struct {
+		Email    string `json:"email"`
+		Password string `json:"password"`
+	}
+
+	var req LoginReq
+	if err := ctx.Bind(&req); err != nil {
+		return
+	}
+	user, err := u.svc.Login(ctx, req.Email, req.Password)
+	if err == service.ErrInvalidUserOrPassword {
+		ctx.String(http.StatusOK, "用户名或密码不对")
+		return
+	}
+	if err != nil {
+		ctx.String(http.StatusOK, "系统错误")
+		return
+	}
+
+	// 步骤2
+	// 在这里用 JWT 设置登录态
+	// 生成一个 JWT token
+	// 下一节课，如果我要在 JWT token 里面带我个人数据，该怎么带？
+	// 比如，我要带 userID
+	claims := UserClaims{
+		RegisteredClaims: jwt.RegisteredClaims{
+			ExpiresAt: jwt.NewNumericDate(time.Now().Add(time.Minute)),
+		},
+		Uid: user.Id,
+	}
+
+	token := jwt.NewWithClaims(jwt.SigningMethodHS512, claims)
+	tokenStr, err := token.SignedString([]byte("95osj3fUD7fo0mlYdDbncXz4VD2igvf0"))
+	if err != nil {
+		ctx.String(http.StatusInternalServerError, "系统错误")
+		return
+	}
+	ctx.Header("x-jwt-token", tokenStr)
+	fmt.Println(user)
 	ctx.String(http.StatusOK, "登录成功")
 	return
 }
@@ -185,6 +234,16 @@ func (u *UserHandler) Edit(ctx *gin.Context) {
 func (u *UserHandler) Profile(ctx *gin.Context) {
 	email := ctx.Query("email")
 
+	c, _ := ctx.Get("claims")
+
+	claims, ok := c.(*UserClaims)
+
+	if !ok {
+		ctx.String(http.StatusOK, "系统错误")
+		return
+	}
+
+	println(claims.Uid)
 	user, err := u.svc.Profile(ctx, email)
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, "未知错误")
@@ -194,4 +253,11 @@ func (u *UserHandler) Profile(ctx *gin.Context) {
 		"nickname": user.NickName,
 		"birthday": user.Birthday,
 	})
+}
+
+type UserClaims struct {
+	jwt.RegisteredClaims
+
+	Uid       int64
+	UserAgent string
 }
