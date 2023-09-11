@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mbook
+  labels:
+    app: mbook
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: mbook
+  template:
+    metadata:
+      name: mbook
+      labels:
+        app: mbook
+    spec:
+      containers:
+        - name: mbook
+          image: mikasa/mbookk:v0.0.1
+          ports:
+            - containerPort: 8080
+      restartPolicy: Always
+      
