@@ -5,16 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9629f076-23bd-4933-af29-a64a3a1a0e45" name="Changes" comment="fix: k8s 启动mbook">
-      <change afterPath="$PROJECT_DIR$/backend/k8s-ingress-nginx.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/k8s-mbook-service.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/k8s-mysql-deployment.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/k8s-mysql-pv.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/k8s-mysql-pvc.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/k8s-mysql-service.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/k8s-redis-deployment.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/k8s-redis-service.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Makefile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pic/3/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pic/3/frontend.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pic/3/services&amp;pods.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/7b51bcc8-5af0-4962-9eff-1e32051f852f.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/7b51bcc8-5af0-4962-9eff-1e32051f852f.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/config/k8s.go" beforeDir="false" afterPath="$PROJECT_DIR$/backend/config/k8s.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/k8s-ingress-nginx.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/k8s-ingress-nginx.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/k8s-mbook-deployment.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/k8s-mbook-deployment.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/k8s-mbook-service.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/k8s-mbook-service.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/k8s-mysql-service.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/k8s-mysql-service.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/k8s-redis-service.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/k8s-redis-service.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/backend/main.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/mbookk" beforeDir="false" afterPath="$PROJECT_DIR$/backend/mbookk" afterDir="false" />
     </list>
@@ -65,36 +69,37 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;DefaultGoTemplateProperty&quot;: &quot;Go File&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.modules.automatic.dependencies.download&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.modules.go.list.on.any.changes.was.set&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;k8s&quot;,
-    &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
-    &quot;go.sdk.automatically.set&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/MinGW/bin/make.exe&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.make&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;D:\\mikasa\\mbook\\frontend\\node_modules\\typescript\\lib&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "DefaultGoTemplateProperty": "Go File",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.go.formatter.settings.were.checked": "true",
+    "RunOnceActivity.go.migrated.go.modules.settings": "true",
+    "RunOnceActivity.go.modules.automatic.dependencies.download": "true",
+    "RunOnceActivity.go.modules.go.list.on.any.changes.was.set": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "three",
+    "go.import.settings.migrated": "true",
+    "go.sdk.automatically.set": "true",
+    "last_opened_file_path": "D:/mikasa/mbook/pic/3",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "reference.settingsdialog.project.make",
+    "ts.external.directory.path": "D:\\mikasa\\mbook\\frontend\\node_modules\\typescript\\lib"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;mysql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\mikasa\mbook\pic\3" />
       <recent name="D:\mikasa\mbook\backend\internal\pkg\ginx" />
       <recent name="D:\mikasa\mbook" />
     </key>
@@ -175,6 +180,17 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />

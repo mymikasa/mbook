@@ -16,4 +16,4 @@ spec:
               service:
                 name: mbook
                 port:
-                  number: 80
+                  number: 8081

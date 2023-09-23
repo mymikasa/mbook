@@ -4,9 +4,9 @@ package config
 
 var Config = config{
 	DB: DBConfig{
-		DSN: "root:root@tcp(mbook-mysql:3309)/mbook",
+		DSN: "root:root@tcp(mbook-mysql:3308)/mbook",
 	},
 	Redis: RedisConfig{
-		Addr: "mbook-redis:16379",
+		Addr: "mbook-redis:6380",
 	},
 }

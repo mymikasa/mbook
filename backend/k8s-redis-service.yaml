@@ -7,7 +7,7 @@ spec:
     app: mbook-redis
   ports:
     - protocol: TCP
-      port: 16379
+      port: 6380
       targetPort: 6379
       nodePort: 30045
   type: NodePort

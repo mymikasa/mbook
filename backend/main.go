@@ -58,6 +58,11 @@ func initWebServer() *gin.Engine {
 				// 你的开发环境
 				return true
 			}
+			// live.mbook.com
+			if strings.HasPrefix(origin, "live.mbook.com") {
+				// 你的开发环境
+				return true
+			}
 			return strings.Contains(origin, "yourcompany.com")
 		},
 		MaxAge: 12 * time.Hour,
