@@ -5,6 +5,7 @@ import (
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-contrib/sessions/memstore"
 	"github.com/gin-gonic/gin"
+	"github.com/mymikasa/mbook/backend/config"
 	"github.com/mymikasa/mbook/backend/internal/pkg/ginx/middlewares/ratelimit"
 	"github.com/mymikasa/mbook/backend/internal/repository"
 	"github.com/mymikasa/mbook/backend/internal/repository/dao"
@@ -20,12 +21,12 @@ import (
 )
 
 func main() {
-	//db := initDB()
-	//server := initWebServer()
+	db := initDB()
+	server := initWebServer()
 	//
-	server := gin.Default()
-	//u := initUser(db)
-	//u.RegisterRoutes(server)
+	//server := gin.Default()
+	u := initUser(db)
+	u.RegisterRoutes(server)
 
 	server.GET("/hello", func(ctx *gin.Context) {
 		ctx.String(http.StatusOK, "你好，你来了")
@@ -38,7 +39,7 @@ func initWebServer() *gin.Engine {
 	server := gin.Default()
 
 	redisClient := redis.NewClient(&redis.Options{
-		Addr: "localhost:6379",
+		Addr: config.Config.Redis.Addr,
 	})
 
 	// 限流
@@ -105,7 +106,7 @@ func initUser(db *gorm.DB) *web.UserHandler {
 }
 
 func initDB() *gorm.DB {
-	db, err := gorm.Open(mysql.Open("root:root@tcp(localhost:3306)/webook"))
+	db, err := gorm.Open(mysql.Open(config.Config.DB.DSN))
 	if err != nil {
 		// 我只会在初始化过程中 panic
 		// panic 相当于整个 goroutine 结束

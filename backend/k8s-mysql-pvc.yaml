@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mbook-mysql-claim
+#  labels:
+#    app: mbook-mysql-claim
+spec:
+  storageClassName: mbook
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi

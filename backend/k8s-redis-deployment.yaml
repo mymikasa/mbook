@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mbook-redis
+  labels:
+    app: mbook-redis
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mbook-redis
+  template:
+    metadata:
+      name: mbook-redis
+      labels:
+        app: mbook-redis
+    spec:
+      containers:
+        - name: mbook-redis
+          image: redis:latest
+          imagePullPolicy: IfNotPresent
+      restartPolicy: Always
+      

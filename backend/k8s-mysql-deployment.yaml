@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mbook-mysql
+  labels:
+    app: mbook-mysql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mbook-mysql
+  template:
+    metadata:
+      name: mbook-mysql
+      labels:
+        app: mbook-mysql
+    spec:
+      containers:
+        - name: mbook-mysql
+          image: mysql:8.0
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: root
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - mountPath: /var/lib/mysql
+              name: mysql-storage
+          ports:
+            - containerPort: 3306
+      restartPolicy: Always
+      volumes:
+        - name: mysql-storage
+          persistentVolumeClaim:
+            claimName: mbook-mysql-claim
+      
