@@ -2,7 +2,7 @@
 <dataSource name="mysql-k8s">
   <database-model serializer="dbm" dbms="MYSQL" family-id="MYSQL" format-version="4.49">
     <root id="1">
-      <DefaultCasing>exact</DefaultCasing>
+      <DefaultCasing>mixed/mixed</DefaultCasing>
       <DefaultEngine>InnoDB</DefaultEngine>
       <DefaultTmpEngine>InnoDB</DefaultTmpEngine>
       <Grants>|root||root||ALTER|G
@@ -1074,8 +1074,8 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
     <schema id="292" parent="1" name="mbook">
-      <IntrospectionTimestamp>2023-09-23.13:02:53</IntrospectionTimestamp>
-      <LocalIntrospectionTimestamp>2023-09-23.05:02:53</LocalIntrospectionTimestamp>
+      <IntrospectionTimestamp>2023-09-24.14:58:54</IntrospectionTimestamp>
+      <LocalIntrospectionTimestamp>2023-09-24.06:58:54</LocalIntrospectionTimestamp>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
     <user id="293" parent="1" name="root">
@@ -1100,57 +1100,5 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <Host>localhost</Host>
       <Plugin>caching_sha2_password</Plugin>
     </user>
-    <table id="298" parent="292" name="users">
-      <Engine>InnoDB</Engine>
-      <CollationName>utf8mb4_0900_ai_ci</CollationName>
-    </table>
-    <column id="299" parent="298" name="id">
-      <AutoIncrement>2</AutoIncrement>
-      <DasType>bigint|0s</DasType>
-      <NotNull>1</NotNull>
-      <Position>1</Position>
-    </column>
-    <column id="300" parent="298" name="email">
-      <DasType>varchar(191)|0s</DasType>
-      <Position>2</Position>
-    </column>
-    <column id="301" parent="298" name="password">
-      <DasType>longtext|0s</DasType>
-      <Position>3</Position>
-    </column>
-    <column id="302" parent="298" name="birthday">
-      <DasType>longtext|0s</DasType>
-      <Position>4</Position>
-    </column>
-    <column id="303" parent="298" name="nick_name">
-      <DasType>longtext|0s</DasType>
-      <Position>5</Position>
-    </column>
-    <column id="304" parent="298" name="ctime">
-      <DasType>bigint|0s</DasType>
-      <Position>6</Position>
-    </column>
-    <column id="305" parent="298" name="utime">
-      <DasType>bigint|0s</DasType>
-      <Position>7</Position>
-    </column>
-    <index id="306" parent="298" name="PRIMARY">
-      <ColNames>id</ColNames>
-      <Type>btree</Type>
-      <Unique>1</Unique>
-    </index>
-    <index id="307" parent="298" name="email">
-      <ColNames>email</ColNames>
-      <Type>btree</Type>
-      <Unique>1</Unique>
-    </index>
-    <key id="308" parent="298" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <Primary>1</Primary>
-      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
-    </key>
-    <key id="309" parent="298" name="email">
-      <UnderlyingIndexName>email</UnderlyingIndexName>
-    </key>
   </database-model>
 </dataSource>
