@@ -7,13 +7,64 @@
     <list default="true" id="9629f076-23bd-4933-af29-a64a3a1a0e45" name="Changes" comment="fix: k8s 启动mbook">
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/078d4089-0e51-4276-bf85-45aef5908e26.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/078d4089-0e51-4276-bf85-45aef5908e26.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/7b51bcc8-5af0-4962-9eff-1e32051f852f.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/7b51bcc8-5af0-4962-9eff-1e32051f852f.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/7b51bcc8-5af0-4962-9eff-1e32051f852f/storage_v2/_src_/schema/mbook.1jwuBg.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/7b51bcc8-5af0-4962-9eff-1e32051f852f/storage_v2/_src_/schema/mbook.1jwuBg.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/kubernetes-settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/kubernetes-settings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/mbook.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/mbook.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/LICENSE" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/docker-compose.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/docker-compose.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/internal/domain/user.go" beforeDir="false" afterPath="$PROJECT_DIR$/backend/internal/domain/user.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/internal/pkg/ginx/middlewares/ratelimit/slide_window.lua" beforeDir="false" afterPath="$PROJECT_DIR$/backend/internal/pkg/ginx/middlewares/ratelimit/slide_window.lua" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/k8s-ingress-nginx.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/k8s-ingress-nginx.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/k8s-mbook-deployment.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/k8s-mbook-deployment.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/k8s-mbook-service.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/k8s-mbook-service.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/k8s-mysql-deployment.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/k8s-mysql-deployment.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/k8s-mysql-pv.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/k8s-mysql-pv.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/k8s-mysql-pvc.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/k8s-mysql-pvc.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/mbookk" beforeDir="false" afterPath="$PROJECT_DIR$/backend/mbookk" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/k8s-mysql-service.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/k8s-mysql-service.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/k8s-redis-deployment.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/k8s-redis-deployment.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/k8s-redis-service.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/k8s-redis-service.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/.eslintrc.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/.eslintrc.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/postcss.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/postcss.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/globals.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/axios/axios.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/axios/axios.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/users/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/users/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/users/login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/users/login.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/users/login_sms.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/users/login_sms.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/users/profile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/users/profile.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/users/signup.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/users/signup.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/tailwind.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/tailwind.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pic/3/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/pic/3/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webook-fe/.eslintrc.json" beforeDir="false" afterPath="$PROJECT_DIR$/webook-fe/.eslintrc.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webook-fe/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/webook-fe/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webook-fe/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/webook-fe/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webook-fe/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/webook-fe/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webook-fe/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/webook-fe/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webook-fe/postcss.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/webook-fe/postcss.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webook-fe/src/app/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/webook-fe/src/app/globals.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webook-fe/src/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/webook-fe/src/app/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webook-fe/src/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/webook-fe/src/app/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webook-fe/src/axios/axios.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webook-fe/src/axios/axios.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webook-fe/src/pages/users/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/webook-fe/src/pages/users/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webook-fe/src/pages/users/login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/webook-fe/src/pages/users/login.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webook-fe/src/pages/users/profile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/webook-fe/src/pages/users/profile.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webook-fe/src/pages/users/signup.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/webook-fe/src/pages/users/signup.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webook-fe/tailwind.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/webook-fe/tailwind.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webook-fe/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/webook-fe/tsconfig.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
